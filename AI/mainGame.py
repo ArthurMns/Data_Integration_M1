@@ -214,6 +214,7 @@ def play_public_goods_game(players_strategies, config):
     print(f"🎮 Démarrage partie : {n_players} joueurs (dont IA)...")
 
     for round_num in range(1, config["n_rounds"] + 1):
+        print(f"   > Tour {round_num}/{config['n_rounds']}...", end=" ", flush=True)
         current_contributions = {}
 
         # Phase de Décision

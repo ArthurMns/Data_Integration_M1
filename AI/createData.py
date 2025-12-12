@@ -16,7 +16,7 @@ from mainGame import (
 # --- CONFIGURATION DE LA GÉNÉRATION ---
 
 # Choisis ton modèle ici (assure-toi qu'il est "pull" dans Ollama)
-MODEL_NAME = "gemma2"  # ou "mistral", "llama3", etc.
+MODEL_NAME = "gemma3"  # ou "mistral", "llama3", etc.
 
 # On réduit les tours pour l'IA (trop long sinon)
 AI_GAME_CONFIG = {
@@ -89,13 +89,21 @@ if __name__ == "__main__":
         # ]
         # filename = "simulation_ia_results2.parquet"
 
+        # players = [
+        #     LLMStrategy(model_name=MODEL_NAME, persona="altruist"),
+        #     LLMStrategy(model_name=MODEL_NAME, persona="greedy"),
+        #     LLMStrategy(model_name=MODEL_NAME, persona="greedy"),
+        #     LLMStrategy(model_name=MODEL_NAME, persona="greedy"),
+        # ]
+        # filename = "simulation_ia_results3.parquet"
+
         players = [
-            LLMStrategy(model_name=MODEL_NAME, persona="altruist"),
-            LLMStrategy(model_name=MODEL_NAME, persona="greedy"),
-            LLMStrategy(model_name=MODEL_NAME, persona="greedy"),
-            LLMStrategy(model_name=MODEL_NAME, persona="greedy"),
+            LLMStrategy(model_name="gemma2", persona="adaptive"),
+            LLMStrategy(model_name="gemma2", persona="adaptive"),
+            LLMStrategy(model_name="gemma2", persona="adaptive"),
+            LLMStrategy(model_name="gemma2", persona="adaptive"),
         ]
-        filename = "simulation_ia_results3.parquet"
+        filename = "simulation_ia_results4.parquet"
 
         df_ia = run_ai_simulation(players)
 
@@ -105,5 +113,5 @@ if __name__ == "__main__":
         save_ia_data(df_ia, filename=filename)
 
     except KeyboardInterrupt:
-        print("\n🛑 Interruption par l'utilisateur. Sauvegarde partielle...")
+        print("\n🛑 Interruption par l'utilisateur.")
         # Si tu coupes le script parce que c'est trop long, ça plantera pas tout

@@ -16,9 +16,15 @@ Visualisation des expériences comportementales : **Greedy** (Avare), **Altruist
 
 # --- CONFIGURATION DES FICHIERS ---
 SCENARIOS = {
-    "Scénario 1 : Le Choc des Psychologies (Full IA)": "data/simulation_IA_results1.parquet",
-    "Scénario 2 : L'IA face aux Robots (IA vs Code)": "data/simulation_IA_results2.parquet",
-    "Scénario 3 : Le Cauchemar (1 Altruiste vs 3 Greedy)": "data/simulation_IA_results3.parquet",
+    "Gemma 2 Scénario 1 : Le Choc des Psychologies (Full IA)": "data_gemma2/simulation_IA_results1.parquet",
+    "Gemma 2 Scénario 2 : L'IA face aux Robots (IA vs Code)": "data_gemma2/simulation_IA_results2.parquet",
+    "Gemma 2 Scénario 3 : Le Cauchemar (1 Altruiste vs 3 Greedy)": "data_gemma2/simulation_IA_results3.parquet",
+    "Gemma 2 Scénario 4 : Tous Adaptatifs": "data_gemma2/simulation_IA_results4.parquet",
+    "Gemma 3 Scénario 1": "data_gemma3/simulation_IA_results1.parquet",
+    "Gemma 3 Scénario 2": "data_gemma3/simulation_IA_results2.parquet",
+    "Gemma 3 Scénario 3": "data_gemma3/simulation_IA_results3.parquet",
+    "Gemma 3 Scénario 4": "data_gemma3/simulation_IA_results4.parquet",
+    "Gemma 2 vs Gemma 3 : Tous Adaptatifs": "data_gemma2_vs_3/simulation_IA_results4.parquet",
 }
 
 # --- BARRE LATÉRALE ---
@@ -137,9 +143,7 @@ col4.metric("Nb Parties", f"{kpis['nb_parties'][0]}")
 st.divider()
 
 # ONGLETS
-tab1, tab2, tab3 = st.tabs(
-    ["📉 Dynamique (Temps)", "🏆 Classement", "🔍 Données Brutes"]
-)
+tab1, tab2 = st.tabs(["📉 Dynamique (Temps)", "🏆 Classement"])
 
 with tab1:
     # --- PARTIE 1 : VUE GLOBALE (MOYENNE) ---
@@ -278,7 +282,3 @@ with tab2:
                 text_auto=".1f",
             )
             st.plotly_chart(fig_contrib, use_container_width=True)
-
-with tab3:
-    st.subheader("Données Brutes")
-    st.dataframe(duckdb.sql(f"SELECT * FROM '{current_file}' LIMIT 100").df())
